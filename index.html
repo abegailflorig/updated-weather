@@ -1,113 +1,84 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <title>Weather Update - Iligan City</title>
-    <!-- Style Here -->
-    <style>
-      body {
-        background-color: #83d8ff69;
-        color: black;
-        margin: 100;
-        padding: 10;
-        background-image: url(be.jpg);
-        background-size: cover;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        font-weight: bolder;
-      }
+<html lang="en">
 
-      #weather {
-        margin-top: 20px;
-        padding: 20px;
-        border-radius: 5px;
-        display: inline-block;
-        width: 80%;
-        text-align: center;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/6bdc2ff475.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+</head>
 
-      .day {
-        display: inline-block;
-        width: 10%;
-        margin: 10px;
-        padding: 10px;
-        background-color: lightgray;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
-      .day img {
-        width: 60px;
-        height: auto;
-      }
-      footer {
-        margin-top: 8%;
-        position: relative;
-        bottom: 0;
-        width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-        color: black;
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Weather Update - Iligan City</h1>
-    <div id="weather">
-      <p>Loading weather data...</p>
+<body>
+    <div class="container">
+        <div class="weather-input">
+            <div class="input-group">
+                <input type="text" placeholder="Search for places" id="userLocation" />
+                <select class="converter" id="converter">
+                    <option> °C</option>
+                    <option> °F</option>
+                </select>
+                <div class="fa fa-search" onclick="findUserLocation()"></div>
+            </div>
+            <div class="weatherIcon"></div>
+            <h2 class="temperature"> </h2>
+            <div class="feelsLike"></div>
+            <div class="description"></div>
+            <hr/>
+            <div class="date"></div>
+            <div class="city"></div>
+        </div>
+
+        <div class="weather-output">
+            <h2 class="heading"> Today's Highlight</h2>
+            <div class="highlights">
+                <div class="humidity">
+                    Humidity
+                    <i class="fa-solid fa-water"></i>
+                    <h1 id="HValue"></h1>
+                </div>
+                <div class="wind-speed">
+                    Wind Speed
+                    <i class="fa-solid fa-wind"></i>
+                    <h1 id="WValue"></h1>
+                </div>
+                <div class="sun">
+                    <span>
+                        <i class="fa-solid fa-sun"></i>
+                    <p><span id="SRValue"></span>Sunrise</p>
+                    </span>
+                    <span>
+                        <i class="fa-regular fa-sun"></i>
+                    <p><span id="SSValue"></span>Sunset</p>
+                    </span>
+                </div>
+                <div class="clouds">
+                    Clouds
+                    <i class="fa-solid fa-cloud"></i>
+                    <h1 id="CValue"></h1>
+                </div>
+                <div class="uv-index">
+                    UV index
+                    <i class="fa-solid fa-bacon"></i>
+                    <h1 id="UVValue"></h1>
+                </div>
+                <div class="pressure">
+                    Pressure
+                    <i class="fa-solid fa-volcano"></i>
+                    <h1 id="PValue"></h1>
+                </div>
+            </div>
+            <br />
+            <h2 class="heading"> This Week</h2>
+            <div class="Forecast">
+                <div id="weather">
+                    <p>Loading weather data...</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer>Abegail Florig_08/21/2024</footer>
-    <script>
-      document.addEventListener("DOMContentLoaded", async function () {
-        const apiKey = "891ebf11d6c8437b86073104242108";
-        const cityName = "Iligan";
-        const apiEndpoint = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`;
 
-        try {
-          const response = await fetch(apiEndpoint);
-          const weatherData = await response.json();
-          console.log(weatherData);
-
-          const weatherContainer = document.getElementById("weather");
-          const currentData = weatherData.current;
-          const forecastDays = weatherData.forecast.forecastday;
-
-          weatherContainer.innerHTML = `
-            <h2>${cityName}</h2>
-            <p><strong>Temperature:</strong> ${currentData.temp_c}°C</p>
-            <p><strong>Weather:</strong> ${currentData.condition.text}</p>
-            <p><strong>Humidity:</strong> ${currentData.humidity}%</p>
-          `;
-
-          forecastDays.forEach((day) => {
-            const date = new Date(day.date).toLocaleDateString("en-US", {
-              weekday: "long",
-            });
-            const temperatureInCelsius = day.day.avgtemp_c;
-            const weatherDescription = day.day.condition.text;
-            const iconUrl = day.day.condition.icon;
-
-            const dayDiv = document.createElement("div");
-            dayDiv.className = "day";
-            dayDiv.innerHTML = `
-              <h3>${date}</h3>
-              <img src="https:${iconUrl}" alt="${weatherDescription}" />
-              <p><strong>Temp:</strong> ${temperatureInCelsius}°C</p>
-              <p><strong>Weather:</strong> ${weatherDescription}</p>
-            `;
-            weatherContainer.appendChild(dayDiv);
-          });
-        } catch (error) {
-          const weatherContainer = document.getElementById("weather");
-          weatherContainer.innerHTML = `<p>Unable to retrieve weather data: ${error.message}</p>`;
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>

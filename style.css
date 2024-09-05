@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:wght@400;500;600&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.weather-input {
+    width: 25%;
+    position: fixed;
+    inset: 0;
+    background-color: violet;
+    padding: 1rem 2.5rem;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.input-group input {
+    background-color: white;
+    text-decoration: capitalize;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 6px;
+    width: 180px;
+    outline: none;
+    border: none;
+}
+
+.converter {
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.fa-search {
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+    margin-left: 10px;
+}
+
+.weatherIcon {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.weatherIcon img {
+    width: 100px;
+    height: 100px;
+}
+
+.temperature {
+    font-size: 48px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.temperature span {
+    font-size: 24px;
+}
+
+.feelsLike,
+.description,
+.date,
+.city {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.weather-output {
+    width: 75%;
+    position: fixed;
+    inset: 0;
+    margin-left: 25%;
+    padding: 2rem;
+    background: white;
+    overflow: auto;
+}
+
+.heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 350px);
+    grid-auto-flow: row;
+    row-gap: 1rem;
+    column-gap: 10px;
+}
+
+.Forecast {
+    display: grid;
+    grid-template-columns: repeat(4, 260px);
+    grid-auto-flow: row;
+    row-gap: 1rem;
+    column-gap: 10px;
+}
+
+.highlights div,
+.Forecast div {
+    height: 200px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: blueviolet;
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.highlights i {
+    font-size: 45px;
+}
+
+.sun span {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
+
+.forecast-desc {
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+    padding-bottom: 5px;
+    font-style: italic;
+}
+
+.description i {
+    font-size: 25px;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(212, 200, 223);
+}
